@@ -1,0 +1,3 @@
+This Project is based on Flutter and Donet C# as a backend. It uses SqlLite to to store data locally in mobile and then by tapping sync button all the recorded data is pushed to central server and gets deleted from local sqlite DB.
+
+This project illustrates the local use of survey form in which surveyer can record data locally and then by connecting to interent push the recorded data to central server.

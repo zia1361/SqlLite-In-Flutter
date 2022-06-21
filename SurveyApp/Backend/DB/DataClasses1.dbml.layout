@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.5, 8.5" name="DataClasses1">
+  <DataContextMoniker Name="/DataClasses1DataContext" />
+  <nestedChildShapes>
+    <classShape Id="f2c4cda1-cefc-459c-8ccc-3ec696fd429c" absoluteBounds="3.5, 1, 2, 1.9631982421875003">
+      <DataClassMoniker Name="/DataClasses1DataContext/Form" />
+      <nestedChildShapes>
+        <elementListCompartment Id="02cb6e01-cd67-4709-9048-e79878ca09d0" absoluteBounds="3.515, 1.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="63a39ebb-d5e0-4197-a7ba-66c0421f2c34" absoluteBounds="0.75, 0.875, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/DataClasses1DataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="20f15723-6663-453b-8ddf-ded8bc6881e9" absoluteBounds="0.765, 1.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7efebfa0-d510-42c1-a60d-746ca3a4b7dc" absoluteBounds="6.25, 0.875, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/DataClasses1DataContext/FormSubmission" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0b1770f9-c41c-4158-88f6-4754c736e495" absoluteBounds="6.265, 1.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 1.98159912109375); (3.5 : 1.98159912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataClasses1DataContext/User/User_Form" />
+      <nodes>
+        <classShapeMoniker Id="63a39ebb-d5e0-4197-a7ba-66c0421f2c34" />
+        <classShapeMoniker Id="f2c4cda1-cefc-459c-8ccc-3ec696fd429c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 1.98159912109375); (6.25 : 1.98159912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DataClasses1DataContext/Form/Form_FormSubmission" />
+      <nodes>
+        <classShapeMoniker Id="f2c4cda1-cefc-459c-8ccc-3ec696fd429c" />
+        <classShapeMoniker Id="7efebfa0-d510-42c1-a60d-746ca3a4b7dc" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="08b72d94-4367-4a4e-8b67-2095a923c873" absoluteBounds="9.25, 1.875, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/DataClasses1DataContext/FormSubmissionValue" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ce4491cd-b5ce-4fe2-b1d2-d6bfd3394e29" absoluteBounds="9.265, 2.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8.25 : 2.45274983723958); (9.25 : 2.45274983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataClasses1DataContext/FormSubmission/FormSubmission_FormSubmissionValue" />
+      <nodes>
+        <classShapeMoniker Id="7efebfa0-d510-42c1-a60d-746ca3a4b7dc" />
+        <classShapeMoniker Id="08b72d94-4367-4a4e-8b67-2095a923c873" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

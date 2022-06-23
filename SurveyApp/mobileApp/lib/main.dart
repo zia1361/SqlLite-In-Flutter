@@ -7,8 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:survey_beta/Backbone/Constants.dart';
 import 'package:survey_beta/DB/DBOrigin.dart';
+import 'package:survey_beta/Modals/SubmissionInfo.dart';
 
 import 'Modals/SubmissionValueInfo.dart';
+import 'Components/MessageBox.dart';
+import 'Components/ProcessBox.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -31,7 +35,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Constants.kPrimaryColor,
       ),
-      home: MyHomePage(title: 'Survey Beta'),
+      home: MyHomePage(title: 'Survey'),
     );
   }
 }
@@ -106,11 +110,21 @@ class _MyHomePageState extends State<MyHomePage> {
             child: GestureDetector(
               onTap: (){
                 try{
+
+
                   new DBOrigin().SyncNow((value){
-                    _showDialog(value, "Output");
-                  });
+
+                    if(value.length <= 0){
+                      MessageBox("No Record to sync", MessageType.Info, context);
+                    }else{
+                      MessageBox("Record successfully synced", MessageType.Success, context);
+                    }
+
+                  }, context);
+
                 }catch(ex){
-                  _showDialog(ex, "Oops");
+                  Navigator.pop(context);
+                  MessageBox(ex, MessageType.Error, context);
                 }
 
               },
@@ -286,19 +300,19 @@ class _MyHomePageState extends State<MyHomePage> {
                       onPressed: () {
 
                         if(name == ""){
-                          _showDialog("Name is required field", "Warning");
+                          MessageBox("Name is required field", MessageType.Warning, context);
                           return;
                         }
                         if(email == ""){
-                          _showDialog("Email is required field", "Warning");
+                          MessageBox("Email is required field", MessageType.Warning, context);
                           return;
                         }
                         if(phone == ""){
-                          _showDialog("Phone # is required field", "Warning");
+                          MessageBox("Phone # is required field", MessageType.Warning, context);
                           return;
                         }
                         if(address == ""){
-                          _showDialog("Address is required field", "Warning");
+                          MessageBox("Address is required field", MessageType.Warning, context);
                           return;
                         }
                        try{
@@ -321,9 +335,9 @@ class _MyHomePageState extends State<MyHomePage> {
                          oValues.add(oValue);
                          new DBOrigin().Insert(1, oValues);
                          ClearFields();
-                         _showSubmissionDialog();
+                         MessageBox("Form Submitted", MessageType.Success, context);
                        }catch(ex){
-                          _showDialog(ex, "Oops");
+                         MessageBox(ex, MessageType.Error, context);
                         }
                       },
                       child: Text('Submit'),
@@ -363,75 +377,16 @@ class _MyHomePageState extends State<MyHomePage> {
        // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
-  Future<void> _showSubmissionDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Success'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: const <Widget>[
 
-                Text('Form has been submitted.'),
-
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Ok'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-  Future<void> _showDialog(String errorMessage, String title) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-            contentPadding: EdgeInsets.only(left: 25, right: 25),
-        title: Center(child: Text(title)),
-        shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        content: Container(
-
-        width: 300,
-        child: SingleChildScrollView(
-        child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-        Text(
-       errorMessage
-        ),
-        ],
-        ),
-        ),
-        ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Ok'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],);
-
-      },
-    );
-  }
   void ClearFields(){
     nameController.text = "";
     emailController.text = "";
     phoneController.text = "";
     addressController.text = "";
+    name = "";
+    email = "";
+    phone = "";
+    address = "";
   }
 }
 

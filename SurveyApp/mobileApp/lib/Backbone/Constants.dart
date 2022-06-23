@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 
 class Constants{
+
+  //Colors
   static Color primaryColor = Color(0xff1d2a4d);
   static Color sectionColor = Color(0xff1f0661);
   static const MaterialColor kPrimaryColor = const MaterialColor(
@@ -21,4 +23,24 @@ class Constants{
     },
   );
   static Color textColor = Color(0xffffffff);
+  static Color InfoColor = Color(0xff17a2b8);
+  static Color WarningColor = Color(0xffffc107);
+  static Color DangerColor = Color(0xffdc3545);
+  static Color SuccessColor = Color(0xff28a745);
+
+  //Icons
+  static Icon InfoIcon = Icon(Icons.info);
+  static Icon WarningIcon = Icon(Icons.warning);
+  static Icon DangerIcon = Icon(Icons.dangerous);
+  static Icon SuccessIcon = Icon(Icons.check_circle);
+
+  static String baseURL = "https://bsite.net/zia01/Api/apicall.ashx";
+  static bool IS_DEBUG_MODE = true;
+}
+
+enum MessageType{
+  Error,
+  Success,
+  Info,
+  Warning
 }

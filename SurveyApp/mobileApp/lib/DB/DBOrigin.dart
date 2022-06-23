@@ -1,8 +1,12 @@
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as p;
+import 'package:survey_beta/Components/ProcessBox.dart';
 import 'package:survey_beta/Modals/SubmissionInfo.dart';
 import 'package:survey_beta/Modals/SubmissionValueInfo.dart';
+import 'package:survey_beta/Services/FormManagement.dart';
+
 class DBOrigin{
   Database database;
   Future<void> CreateDB() async {
@@ -52,7 +56,7 @@ class DBOrigin{
     await database.close();
   }
 
-  Future<void> SyncNow(callback) async{
+  Future<void> SyncNow(callback, context) async{
     var databasesPath = await getDatabasesPath();
     String path = p.join(databasesPath, 'demo.db');
 
@@ -81,16 +85,39 @@ class DBOrigin{
       oSubmission.oValues = oValues;
       oSubmissions.add(oSubmission);
 
+
     }
-    String innerText = "";
-    for(var oSubmission in oSubmissions){
-      innerText += oSubmission.toMap().toString() + "*******";
-      for(var oValue in oSubmission.oValues){
-        innerText += oValue.toMap().toString() + "&&&&&&";
-      }
+    // String innerText = "";
+    // for(var oSubmission in oSubmissions){
+    //   innerText += oSubmission.toMap().toString() + "*******";
+    //   for(var oValue in oSubmission.oValues){
+    //     innerText += oValue.toMap().toString() + "&&&&&&";
+    //   }
+    // }
+
+    //use this code when you have set the base URL in contstants.dart file
+    if(oSubmissions.length > 0){
+      ProcessBox(context);
+      SubmitForms(oSubmissions).then((value){
+        if(value.IsError == true){
+          throw Exception(value.ErrorMessage);
+        }else{
+          Navigator.pop(context);
+          callback(oSubmissions);
+          DeleteAll();
+        }
+
+      });
+
+
+    }else{
+      callback(oSubmissions);
     }
 
-    callback(innerText);
+    // callback(oSubmissions);
+
+
+
 
 
 

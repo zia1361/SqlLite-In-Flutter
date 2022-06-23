@@ -4,7 +4,7 @@ int SubmissionId;
 String QuestionText;
 String AnswerText;
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'Id': Id,
       'SubmissionId': SubmissionId,

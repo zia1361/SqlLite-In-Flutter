@@ -9,15 +9,17 @@ int FormId;
 List<SubmissionValueInfo> oValues;
 bool IsError;
 String ErrorMessage;
-  Map<String, dynamic> toMap() {
+
+  Map<String, dynamic> toJson() {
     return {
       'Id': Id,
       'DeviceId': DeviceId,
-      'SubmittedOn': SubmittedOn,
-      'SyncedOn': SyncedOn,
+      'SubmittedOn': SubmittedOn.toString(),
+      'SyncedOn': SyncedOn.toString(),
       'FormId': FormId,
       'oValues': oValues,
     };
   }
+
 
 }
